@@ -1,10 +1,9 @@
 package com.aula.worshopmongo.services;
 
 import com.aula.worshopmongo.domain.User;
-import com.aula.worshopmongo.dto.UserDto;
+import com.aula.worshopmongo.dto.UserDTO;
 import com.aula.worshopmongo.repositories.UserRepository;
 import com.aula.worshopmongo.services.exception.ObjectNotFoundException;
-import com.sun.jdi.ObjectCollectedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +45,7 @@ public class UserService {
         newUser.setName(user.getName());
     }
 
-    public User fromDto(UserDto dto){
+    public User fromDto(UserDTO dto){
         return new User(dto.getId(), dto.getName(), dto.getEmail());
     }
 

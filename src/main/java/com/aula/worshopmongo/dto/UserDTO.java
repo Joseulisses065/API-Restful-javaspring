@@ -2,15 +2,15 @@ package com.aula.worshopmongo.dto;
 
 import com.aula.worshopmongo.domain.User;
 
-public class UserDto {
+public class UserDTO {
     private String id;
     private String name;
     private String email;
 
-    public UserDto() {
+    public UserDTO() {
     }
 
-    public UserDto(User obj) {
+    public UserDTO(User obj) {
         this.id = obj.getId();
         this.email = obj.getEmail();
         this.name = obj.getName();

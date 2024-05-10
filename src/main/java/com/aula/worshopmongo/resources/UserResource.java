@@ -1,7 +1,7 @@
 package com.aula.worshopmongo.resources;
 
 import com.aula.worshopmongo.domain.User;
-import com.aula.worshopmongo.dto.UserDto;
+import com.aula.worshopmongo.dto.UserDTO;
 import com.aula.worshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,21 +19,21 @@ public class UserResource {
     @Autowired
     private UserService service;
     @GetMapping
-    public ResponseEntity<List<UserDto>> findAll() {
+    public ResponseEntity<List<UserDTO>> findAll() {
         List<User> list = service.findAll();
-        List<UserDto> dtoList = list.stream().map(x->new UserDto(x)).collect(Collectors.toList());
+        List<UserDTO> dtoList = list.stream().map(x->new UserDTO(x)).collect(Collectors.toList());
         return ResponseEntity.ok().body(dtoList);
     }
 
     @GetMapping(value = "/{id}")
-    public  ResponseEntity<UserDto> findById(@PathVariable String id){
+    public  ResponseEntity<UserDTO> findById(@PathVariable String id){
         User user = service.findById(id);
-        UserDto dto = new UserDto(user);
+        UserDTO dto = new UserDTO(user);
         return ResponseEntity.ok().body(dto);
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody UserDto userDto){
+    public ResponseEntity<Void> insert(@RequestBody UserDTO userDto){
         User user = service.fromDto(userDto);
         user = service.insert(user);
         //this code will get the uri of inserted object
@@ -50,7 +48,7 @@ public class UserResource {
     }
 
     @PutMapping(value = "/{id}")
-    public  ResponseEntity<Void> update(@RequestBody UserDto objDto, @PathVariable String id){
+    public  ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id){
         User user = service.fromDto(objDto);
         user.setId(id);
         user = service.update(user);
