@@ -1,6 +1,7 @@
 package com.aula.worshopmongo.services;
 
 import com.aula.worshopmongo.domain.User;
+import com.aula.worshopmongo.dto.UserDto;
 import com.aula.worshopmongo.repositories.UserRepository;
 import com.aula.worshopmongo.services.exception.ObjectNotFoundException;
 import com.sun.jdi.ObjectCollectedException;
@@ -23,5 +24,13 @@ public class UserService {
     public User findById(String id){
         Optional<User> user = userRepository.findById(id);
         return user.orElseThrow(()-> new ObjectNotFoundException("Object not found"));
+    }
+
+    public User insert(User user){
+        return userRepository.insert(user);
+    }
+
+    public User fromDto(UserDto dto){
+        return new User(dto.getId(), dto.getName(), dto.getEmail());
     }
 }
